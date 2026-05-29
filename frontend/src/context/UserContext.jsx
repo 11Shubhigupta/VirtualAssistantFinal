@@ -10,7 +10,7 @@ function UserContext({ children }) {
   const serverUrl = import.meta.env.VITE_SERVER_URL || 
     (window.location.hostname.includes("localhost") || window.location.hostname.includes("127.0.0.1")
       ? "http://localhost:8000"
-      : "https://backend-xi-ten-86.vercel.app");
+      : "https://backend-43l9p91k8-shubhi-guptas-projects-48d03881.vercel.app");
   const [userData,setUserData]=useState(null)
    const[frontendImage,setFrontendImage]=useState(null)
       const[backendImage,setBackendImage]=useState(null)
