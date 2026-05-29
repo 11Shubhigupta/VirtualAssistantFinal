@@ -11,12 +11,21 @@ import fs from "fs";
 try {
       const uploadResult = await cloudinary.uploader
        .upload(filePath)
-       fs.unlinkSync(filePath)
+       try {
+           fs.unlinkSync(filePath)
+       } catch (unlinkErr) {
+           console.error("Failed to delete temp file:", unlinkErr)
+       }
 
        return uploadResult.secure_url
 } catch (error) {
-         fs.unlinkSync(filePath)
-         return res.status(500).json({message:"cloudinary error occured"})
+         try {
+             fs.unlinkSync(filePath)
+         } catch (unlinkErr) {
+             console.error("Failed to delete temp file on error:", unlinkErr)
+         }
+         console.error("Cloudinary upload failed:", error)
+         return null
 }
 
  }
