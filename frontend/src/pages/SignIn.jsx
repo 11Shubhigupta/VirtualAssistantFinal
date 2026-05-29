@@ -26,7 +26,10 @@ const handleSignIn=async (e)=>{
     let result=await axios.post(`${serverUrl}/api/auth/signin`,{
       email,password
     },{withCredentials:true})
- setUserData(result.data)
+     setUserData(result.data)
+     if (result.data.token) {
+         localStorage.setItem("token", result.data.token)
+     }
     setLoading(false)
          navigate("/")
   } catch (error) {

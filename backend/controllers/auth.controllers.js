@@ -32,7 +32,11 @@ export const signUp=async (req,res)=>{
                 secure: process.env.NODE_ENV === "production"
             })
 
-            return res.status(201).json(user)
+            // Convert to object and embed the token in the JSON response so the frontend can save it
+            const userObj = user.toObject();
+            userObj.token = token;
+
+            return res.status(201).json(userObj)
 
     } catch (error) {
            return res.status(500).json({message:`sign up error ${error}`})
@@ -68,7 +72,11 @@ export const Login=async (req,res)=>{
                 secure: process.env.NODE_ENV === "production"
             })
 
-            return res.status(200).json(user)
+            // Convert to object and embed the token in the JSON response so the frontend can save it
+            const userObj = user.toObject();
+            userObj.token = token;
+
+            return res.status(200).json(userObj)
 
     } catch (error) {
            return res.status(500).json({message:`login error ${error}`})

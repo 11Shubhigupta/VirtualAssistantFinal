@@ -17,7 +17,13 @@ function UserContext({ children }) {
 const[selectedImage,setSelectedImage]=useState(null)
   const handleCurrentUser=async ()=>{
     try {
-      const result=await axios.get(`${serverUrl}/api/user/current`,{withCredentials:true})
+      const token = localStorage.getItem("token")
+      const result=await axios.get(`${serverUrl}/api/user/current`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials:true
+      })
       setUserData(result.data)
       console.log(result.data)
     } catch (error) {
@@ -27,7 +33,13 @@ const[selectedImage,setSelectedImage]=useState(null)
 
 const getGeminiResponse=async (command)=>{
   try {
-    const result=await axios.post(`${serverUrl}/api/user/asktoassistant`,{command},{withCredentials:true})
+    const token = localStorage.getItem("token")
+    const result=await axios.post(`${serverUrl}/api/user/asktoassistant`,{command},{
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials:true
+    })
     return result.data
   } catch (error) {
     console.log(error)

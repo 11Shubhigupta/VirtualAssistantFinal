@@ -20,7 +20,13 @@ function Customize2() {
             }else{
                 formData.append("imageUrl",selectedImage)
             }
-            const result =await axios.post(`${serverUrl}/api/user/update`,formData,{withCredentials:true})
+            const token = localStorage.getItem("token")
+            const result =await axios.post(`${serverUrl}/api/user/update`,formData,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials:true
+            })
          setLoading(false)
             console.log(result.data)
             setUserData(result.data)

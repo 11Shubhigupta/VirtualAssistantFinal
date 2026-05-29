@@ -1356,12 +1356,14 @@ function Home() {
         withCredentials: true
       })
 
+      localStorage.removeItem("token")
       setUserData(null)
 
       navigate("/signin")
 
     } catch (error) {
 
+      localStorage.removeItem("token")
       setUserData(null)
 
       console.log(error)
