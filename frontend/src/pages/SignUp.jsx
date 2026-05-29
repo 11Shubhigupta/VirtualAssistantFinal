@@ -32,7 +32,7 @@ const handleSignUp=async (e)=>{
   } catch (error) {
      setUserData(null)
      setLoading(false)
-    setErr(error.response.data.message)
+     setErr(error.response?.data?.message || error.message || "Network Error: Could not connect to server")
   }
   
 }
